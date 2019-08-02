@@ -15,25 +15,19 @@ export interface ICartItem {
 }
 
 type TCartItemProps = ICartItem & {
-    setCartItemSubtotal: (subtotal: number)=>void;
+    updateCartItem: (newCartItemData:Partial<ICartItem>)=>void;
     removeItem: ()=>void;
 }
 
 function Info(props:TCartItemProps){
-    const [quantity, setQuantity] = useState(0)
-    useEffect(() => {
-        setQuantity(props.quantity);
-    }, []);
 
     const handleQuantityChange = (e: React.FormEvent<HTMLInputElement>) => {
         const value = Number(e.currentTarget.value);
         if(value > 0 && value < props.available){
-            setQuantity(value);
-            props.setCartItemSubtotal(value * props.price);
+            props.updateCartItem({quantity: value });
         }else{
             const limit = value < 1 ? 1 : props.available;
-            setQuantity(limit);
-            props.setCartItemSubtotal(limit * props.price);
+            props.updateCartItem({quantity: limit });
         }
     }
 
@@ -44,12 +38,12 @@ function Info(props:TCartItemProps){
             <div className="quantity">Quantity in Cart: 
                 <input 
                     type="number" 
-                    value={quantity} 
+                    value={props.quantity} 
                     onChange={handleQuantityChange}
                 />
             </div>
             <div className="price">Price: {formatCurrency(props.price)}</div>
-            <div className="sub-total">Subtotal: {formatCurrency(props.price * quantity)}</div>
+            <div className="sub-total">Subtotal: {formatCurrency(props.price * props.quantity)}</div>
         </div>
     </div>
 }

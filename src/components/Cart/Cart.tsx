@@ -4,22 +4,25 @@ import {CartItem, ICartItem} from '../CartItem/CartItem';
 import './Cart.css';
 import { formatCurrency } from '../../uils/formatCurrency';
 
-interface ICartProps {
+export interface ICartProps {
     data: ICartItem[];
-    removeItemFromCart: (index:number) => void;
+    updateCartData: (data:ICartProps['data']) => void;
 }
 
 export function Cart(props: ICartProps) {
-    const [itemSubtotals, setItemSubtotals] = useState(
-        props.data.map(
-            cartItem => cartItem.quantity * cartItem.price
-        )
-    );
+    const removeItemFromCart = (index:number) => {
+        const cloneCartData = [...props.data];
+        cloneCartData.splice(index, 1);
+        props.updateCartData(cloneCartData);
+    }
 
-    const setCartItemSubtotal = (cartIndex:number) => (subtotal:number) => {
-        const itemSubtotalsClone = [...itemSubtotals];
-        itemSubtotalsClone[cartIndex] = subtotal;
-        setItemSubtotals(itemSubtotalsClone);
+    const updateCartItem = (index:number) => (newCartItemData:Partial<ICartItem>) => {
+        const cloneCartData = [...props.data];
+        cloneCartData[index] = {
+            ...cloneCartData[index],
+            ...newCartItemData
+        }
+        props.updateCartData(cloneCartData);
     }
     
     return (
@@ -27,13 +30,13 @@ export function Cart(props: ICartProps) {
             {props.data.map((cartItem, i) => {
                 return <CartItem 
                     {...cartItem} 
-                    setCartItemSubtotal={setCartItemSubtotal(i)} 
-                    removeItem={()=>{props.removeItemFromCart(i)}}
+                    updateCartItem={updateCartItem(i)} 
+                    removeItem={()=>{removeItemFromCart(i)}}
                 />
             })}
             <div className="total">Total: {
                 formatCurrency(
-                    itemSubtotals.reduce(
+                    props.data.map((a => a.quantity * a.price)).reduce(
                         (a, b) => {
                             return a + b;
                         }
