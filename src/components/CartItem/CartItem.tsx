@@ -31,15 +31,17 @@ function Info(props:ICartItem){
     return <div className="cart-item-info">
         <div className="product-name">{props.productName}</div>
         <div className="description">{props.description}</div>
-        <div className="quantity">
-            <input 
-                type="number" 
-                value={quantity} 
-                onChange={handleQuantityChange}
-            />
+        <div className="quantity-form">
+            <div className="quantity">Quantity in Cart: 
+                <input 
+                    type="number" 
+                    value={quantity} 
+                    onChange={handleQuantityChange}
+                />
+            </div>
+            <div className="price">Price: {props.price}</div>
+            <div className="sub-total">Subtotal: {props.price * quantity}</div>
         </div>
-        <div className="price">{props.price}</div>
-        <div className="sub-total">{props.price * quantity}</div>
     </div>
 }
 

@@ -11,3 +11,12 @@
     width: 10rem;
     height: 10rem;
 }
+
+.quantity-form {
+    display: flex;
+}
+
+.quantity-form div {
+    padding: 0.5rem;
+}
+
