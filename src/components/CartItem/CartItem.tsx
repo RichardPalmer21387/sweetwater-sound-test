@@ -33,6 +33,7 @@ function Info(props:TCartItemProps){
 
     return <div className="cart-item-info">
         <div className="product-name">{props.productName}</div>
+        <div className="manufacturer">Manufacturer: {props.manufacturer}</div>
         <div className="description">{props.description}</div>
         <div className="quantity-form">
             <div className="quantity">Quantity in Cart: 
