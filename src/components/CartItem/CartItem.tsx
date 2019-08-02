@@ -1,5 +1,6 @@
 import React, { useEffect, useState, ChangeEvent } from 'react';
 import './CartItem.css';
+import { formatCurrency } from '../../uils/formatCurrency';
 
 export interface ICartItem {
     image: string;
@@ -39,8 +40,8 @@ function Info(props:ICartItem){
                     onChange={handleQuantityChange}
                 />
             </div>
-            <div className="price">Price: {props.price}</div>
-            <div className="sub-total">Subtotal: {props.price * quantity}</div>
+            <div className="price">Price: {formatCurrency(props.price)}</div>
+            <div className="sub-total">Subtotal: {formatCurrency(props.price * quantity)}</div>
         </div>
     </div>
 }
