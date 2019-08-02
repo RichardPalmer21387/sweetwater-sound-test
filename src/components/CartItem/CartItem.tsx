@@ -14,7 +14,11 @@ export interface ICartItem {
     available: number;
 }
 
-function Info(props:ICartItem){
+type TCartItemProps = ICartItem & {
+    setCartItemSubtotal: (subtotal: number)=>void;
+}
+
+function Info(props:TCartItemProps){
     const [quantity, setQuantity] = useState(0)
     useEffect(() => {
         setQuantity(props.quantity);
@@ -24,8 +28,11 @@ function Info(props:ICartItem){
         const value = Number(e.currentTarget.value);
         if(value > 0 && value < props.available){
             setQuantity(value);
+            props.setCartItemSubtotal(value * props.price);
         }else{
-            setQuantity(value < 1 ? 1 : props.available);
+            const limit = value < 1 ? 1 : props.available;
+            setQuantity(limit);
+            props.setCartItemSubtotal(limit * props.price);
         }
     }
 
@@ -46,7 +53,7 @@ function Info(props:ICartItem){
     </div>
 }
 
-export function CartItem(props:ICartItem){
+export function CartItem(props:TCartItemProps){
     return <div className="cart-item">
         <a href={props.url} className="product-image">
             <img src={props.image} alt={props.productName} />
