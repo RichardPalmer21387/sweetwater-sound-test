@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, ChangeEvent } from 'react';
 import './CartItem.css';
 
 export interface ICartItem {
@@ -19,6 +19,15 @@ function Info(props:ICartItem){
         setQuantity(props.quantity);
     }, []);
 
+    const handleQuantityChange = (e: React.FormEvent<HTMLInputElement>) => {
+        const value = Number(e.currentTarget.value);
+        if(value > 0 && value < props.available){
+            setQuantity(value);
+        }else{
+            setQuantity(value < 1 ? 1 : props.available);
+        }
+    }
+
     return <div className="cart-item-info">
         <div className="product-name">{props.productName}</div>
         <div className="description">{props.description}</div>
@@ -26,9 +35,7 @@ function Info(props:ICartItem){
             <input 
                 type="number" 
                 value={quantity} 
-                onChange={(e)=>{ 
-                    setQuantity(Number(e.currentTarget.value)) 
-                }} 
+                onChange={handleQuantityChange}
             />
         </div>
     </div>
