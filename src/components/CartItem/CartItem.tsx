@@ -38,6 +38,8 @@ function Info(props:ICartItem){
                 onChange={handleQuantityChange}
             />
         </div>
+        <div className="price">{props.price}</div>
+        <div className="sub-total">{props.price * quantity}</div>
     </div>
 }
 
