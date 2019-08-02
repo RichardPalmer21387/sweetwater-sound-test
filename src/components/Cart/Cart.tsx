@@ -13,7 +13,6 @@ export function Cart(props: ICartProps) {
             {props.data.map((cartItem) => {
                 return <CartItem {...cartItem} />
             })}
-            {JSON.stringify(props.data)}
         </div>
     );
 }
