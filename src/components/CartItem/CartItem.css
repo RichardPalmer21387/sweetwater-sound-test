@@ -1,0 +1,13 @@
+.cart-item {
+    display: flex;
+    border: 1px solid black;
+    margin: 1rem;
+}
+
+.product-image{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 10rem;
+    height: 10rem;
+}

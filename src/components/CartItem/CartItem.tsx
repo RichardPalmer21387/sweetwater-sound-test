@@ -45,7 +45,7 @@ function Info(props:ICartItem){
 
 export function CartItem(props:ICartItem){
     return <div className="cart-item">
-        <a href={props.url}>
+        <a href={props.url} className="product-image">
             <img src={props.image} alt={props.productName} />
         </a>
         <Info {...props} />
