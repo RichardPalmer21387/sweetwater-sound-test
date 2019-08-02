@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './CartItem.css';
 
 export interface ICartItem {
@@ -14,10 +14,23 @@ export interface ICartItem {
 }
 
 function Info(props:ICartItem){
+    const [quantity, setQuantity] = useState(0)
+    useEffect(() => {
+        setQuantity(props.quantity);
+    }, []);
+
     return <div className="cart-item-info">
         <div className="product-name">{props.productName}</div>
         <div className="description">{props.description}</div>
-        <div className="quantity"><input type="number" value={props.quantity} /></div>
+        <div className="quantity">
+            <input 
+                type="number" 
+                value={quantity} 
+                onChange={(e)=>{ 
+                    setQuantity(Number(e.currentTarget.value)) 
+                }} 
+            />
+        </div>
     </div>
 }
 
