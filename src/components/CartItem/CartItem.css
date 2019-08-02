@@ -1,10 +1,16 @@
 .cart-item {
     display: flex;
+    align-items: center;
     border: 1px solid black;
     margin: 1rem;
 }
 
+.cart-item-info {
+    flex: 1 1;
+}
+
 .product-image{
+    flex: 0 0 10rem;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -23,5 +29,11 @@
 
 .quantity-form div {
     padding: 0.5rem;
+}
+
+.remove-btn {
+    flex: 0 1;
+    display: flex;
+    padding: 2rem;
 }
 

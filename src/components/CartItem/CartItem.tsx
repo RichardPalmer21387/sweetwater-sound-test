@@ -16,6 +16,7 @@ export interface ICartItem {
 
 type TCartItemProps = ICartItem & {
     setCartItemSubtotal: (subtotal: number)=>void;
+    removeItem: ()=>void;
 }
 
 function Info(props:TCartItemProps){
@@ -59,5 +60,6 @@ export function CartItem(props:TCartItemProps){
             <img src={props.image} alt={props.productName} />
         </a>
         <Info {...props} />
+        <div className='remove-btn'><button title="remove" onClick={props.removeItem}>X</button></div>
     </div>
 }

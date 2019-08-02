@@ -6,6 +6,7 @@ import { formatCurrency } from '../../uils/formatCurrency';
 
 interface ICartProps {
     data: ICartItem[];
+    removeItemFromCart: (index:number) => void;
 }
 
 export function Cart(props: ICartProps) {
@@ -24,7 +25,11 @@ export function Cart(props: ICartProps) {
     return (
         <div className="cart">
             {props.data.map((cartItem, i) => {
-                return <CartItem {...cartItem} setCartItemSubtotal={setCartItemSubtotal(i)} />
+                return <CartItem 
+                    {...cartItem} 
+                    setCartItemSubtotal={setCartItemSubtotal(i)} 
+                    removeItem={()=>{props.removeItemFromCart(i)}}
+                />
             })}
             <div className="total">Total: {
                 formatCurrency(
